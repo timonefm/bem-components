@@ -1,4 +1,4 @@
-block('dropdown').mod('switcher', 'button').elem('switcher').content()(function() {
+block('dropdown').mod('switcher', 'button').elem('switcher').def()(function() {
     var content = this.ctx.content;
     if(Array.isArray(content)) return content;
 
@@ -12,7 +12,9 @@ block('dropdown').mod('switcher', 'button').elem('switcher').content()(function(
         resMods.size || (resMods.size = dropdownMods.size);
         resMods.theme || (resMods.theme = dropdownMods.theme);
         resMods.disabled = dropdownMods.disabled;
+
+        res.mix = { block : 'dropdown', mods : this.mods, js : { id : this.ctx.id } };
     }
 
-    return res;
+    applyCtx(res);
 });

@@ -14,6 +14,8 @@ module.exports = function(bh) {
             resMods.size || (resMods.size = dropdownMods.size);
             resMods.theme || (resMods.theme = dropdownMods.theme);
             resMods.disabled = dropdownMods.disabled;
+
+            res.mix = { block : 'dropdown', mods : ctx.tParam('mods'), js : { id : json.id } };
         }
 
         return res;

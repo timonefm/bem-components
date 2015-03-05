@@ -13,6 +13,8 @@ module.exports = function(bh) {
                 dropdownMods = json.blockMods;
             resMods.theme || (resMods.theme = dropdownMods.theme);
             resMods.disabled = dropdownMods.disabled;
+
+            res.mix = { block : 'dropdown', mods : ctx.tParam('mods'), js : { id : json.id } };
         }
 
         return res;

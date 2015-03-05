@@ -1,1 +1,12 @@
-block('dropdown').elem('switcher').tag()(false);
+block('dropdown').elem('switcher').def()(function() {
+    var ctx = this.ctx,
+        content = ctx.content;
+
+    content.block && (content.mix = {
+        block : 'dropdown',
+        mods: this.mods,
+        js : { id : ctx.id }
+    });
+
+    applyCtx(content);
+});
