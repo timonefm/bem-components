@@ -1,12 +1,14 @@
 module.exports = function(bh) {
 
     bh.match('dropdown_switcher_link__switcher', function(ctx, json) {
-        var content = ctx.content();
-        if(Array.isArray(content)) return content;
+        var dropdown = ctx.tParam('dropdown'),
+            switcher = dropdown.switcher;
 
-        var res = ctx.isSimple(content)?
-            { block : 'link', mods : { pseudo : true }, content : content } :
-            content;
+        if(Array.isArray(switcher)) return switcher;
+
+        var res = ctx.isSimple(switcher)?
+            { block : 'link', mods : { pseudo : true }, content : switcher } :
+            switcher;
 
         if(res.block === 'link') {
             var resMods = res.mods || (res.mods = {}),
@@ -14,7 +16,7 @@ module.exports = function(bh) {
             resMods.theme || (resMods.theme = dropdownMods.theme);
             resMods.disabled = dropdownMods.disabled;
 
-            res.mix = { block : 'dropdown', mods : ctx.tParam('mods'), js : { id : json.id } };
+            res.mix = dropdown;
         }
 
         return res;
