@@ -1,7 +1,7 @@
 block('dropdown')(
     def()(function() {
         this.ctx.js = { id : this.generateId() };
-        applyCtx([ apply('switcher'), apply('popup') ]);
+        applyCtx([apply('switcher'), apply('popup')]);
     }),
     mode('switcher')(function() {
         var ctx = this.ctx,
