@@ -21,6 +21,7 @@ libs
 /gemini-report/
 
 /dist
+!dist/test/build.js
 /*.docs
 /*.examples
 /*.specs
