@@ -1,11 +1,32 @@
 block('dropdown')(
     def()(function() {
+        this.ctx.js = { id : this.generateId() };
+        applyCtx([ apply('switcher'), apply('popup') ]);
+    }),
+    mode('switcher')(function() {
         var ctx = this.ctx,
-            id = this.generateId();
+            switcher = ctx.switcher;
 
-        applyCtx([
-            { elem : 'switcher', content : ctx.switcher, id : id },
-            { elem : 'popup', popup : ctx.popup, id : id }
-        ]);
+        switcher.block && (switcher.mix = ctx);
+
+        return switcher;
+    }),
+    mode('popup')(function() {
+        var ctx = this.ctx,
+            popup = ctx.popup;
+
+        if(this.isSimple(popup) || popup.block !== 'popup') {
+            popup = { block : 'popup', content : popup };
+        }
+
+        var popupMods = popup.mods || (popup.mods = {});
+        popupMods.theme || (popupMods.theme = this.mods.theme);
+        popupMods.hasOwnProperty('autoclosable') || (popupMods.autoclosable = true);
+
+        popupMods.target = 'anchor';
+
+        popup.mix = ctx;
+
+        return popup;
     })
 );
