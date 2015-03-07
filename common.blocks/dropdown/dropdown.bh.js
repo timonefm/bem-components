@@ -3,8 +3,9 @@ module.exports = function(bh) {
     bh.match({
         'dropdown' : function(ctx) {
             ctx
-                .js({ id : ctx.generateId() })
-                .tParam('dropdown', ctx.json());
+                .js(ctx.extend({ id : ctx.generateId() }, ctx.js()))
+                .tParam('dropdown', ctx.json())
+                .tParam('theme', ctx.mod('theme'));
 
             return [{ elem : 'switcher' }, { elem : 'popup' }];
         },
@@ -18,7 +19,7 @@ module.exports = function(bh) {
             }
 
             var popupMods = popup.mods || (popup.mods = {});
-            popupMods.theme || (popupMods.theme = ctx.mod('theme'));
+            popupMods.theme || (popupMods.theme = ctx.tParam('theme'));
             popupMods.hasOwnProperty('autoclosable') || (popupMods.autoclosable = true);
 
             popupMods.target = 'anchor';
