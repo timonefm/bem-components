@@ -76,6 +76,6 @@
     "gemini": "http-server -s -p 8000 & p=$!; gemini test --reporter html --reporter flat; e=$?; kill -9 ${p}; exit ${e}",
     "gemini-gather": "http-server -c \"no-cache, no-store\" -s -p 8000 & p=$!; gemini gather; kill -9 ${p}",
     "coverage": "ISTANBUL_COVERAGE=yes npm run specs",
-    "dist-specs": "npm run dist && node dist/test/build.js && mkdir -p dist/test/lib && borschik -i libs/bem-pr/spec.blocks/mocha/mocha.js -o dist/test/lib/mocha.js && borschik -i libs/bem-pr/spec.blocks/chai/chai.js -o dist/test/lib/chai.js && borschik -i libs/bem-pr/spec.blocks/sinon/sinon.js -o dist/test/lib/sinon.js && borschik -i libs/bem-pr/spec.blocks/sinon-chai/sinon-chai.js -o dist/test/lib/sinon-chai.js && borschik -i libs/bem-pr/spec.blocks/spec/spec.js -o dist/test/lib/spec.js && mocha-phantomjs dist/test/fixtures/*.html"
+    "dist-specs": "npm run dist && node dist/test/build.js && mkdir -p dist/test/lib && borschik -i libs/bem-pr/spec.blocks/mocha/mocha.css -o dist/test/lib/mocha.css && borschik -i libs/bem-pr/spec.blocks/mocha/mocha.js -o dist/test/lib/mocha.js && borschik -i libs/bem-pr/spec.blocks/chai/chai.js -o dist/test/lib/chai.js && borschik -i libs/bem-pr/spec.blocks/sinon/sinon.js -o dist/test/lib/sinon.js && borschik -i libs/bem-pr/spec.blocks/sinon-chai/sinon-chai.js -o dist/test/lib/sinon-chai.js && borschik -i libs/bem-pr/spec.blocks/spec/spec.js -o dist/test/lib/spec.js && mocha-phantomjs dist/test/fixtures/*.html"
   }
 }

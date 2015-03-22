@@ -30,6 +30,8 @@ platforms.forEach(function (platform) {
     var walker = walk(levels[platform]),
         specs = [],
         html = '<html><head><meta charset="utf-8">' +
+            '<link href="../lib/mocha.css" rel="stylesheet" />' +
+            '<link href="../../' + platform + '/bem-components.css" rel="stylesheet" />' +
             '<script src="../../' + platform + '/bem-components' + '.js+bemhtml.js"></script>' +
             '<script src="../lib/mocha.js"></script>' +
             '<script src="../lib/sinon.js"></script>' +
@@ -49,7 +51,7 @@ platforms.forEach(function (platform) {
         }).join('\n');
 
         html +=
-            '</head>' +
+            '</head><body>' +
             '<div id="mocha"></div>' +
             '<script>(function() {' +
                 'var global = this;' +
