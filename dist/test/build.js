@@ -30,7 +30,7 @@ platforms.forEach(function (platform) {
     var walker = walk(levels[platform]),
         specs = [],
         html = '<html><head><meta charset="utf-8">' +
-            '<script src="../../' + platform + '/' + platform + '.pre.browser+bemhtml.js"></script>' +
+            '<script src="../../' + platform + '/bem-components' + '.js+bemhtml.js"></script>' +
             '<script src="../lib/mocha.js"></script>' +
             '<script src="../lib/sinon.js"></script>' +
             '<script src="../lib/chai.js"></script>' +
@@ -66,6 +66,7 @@ platforms.forEach(function (platform) {
             '</script>' +
         '</body></html>';
 
+        fs.existsSync(fixtures) || fs.mkdirSync(fixtures);
         fs.writeFileSync(path.join(fixtures, platform + '.html'), html, 'utf-8');
     });
 });
