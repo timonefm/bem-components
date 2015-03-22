@@ -46,7 +46,34 @@ platforms.forEach(function (platform) {
     });
 
     walker.on('end', function () {
-        html += specs.map(function (url) {
+        html += specs.sort(function (str1, str2) {
+            var s1 = str1.split('/'),
+                s2 = str2.split('/'),
+                b1 = s1[1],
+                b2 = s2[1];
+
+            if(b1 === 'popup' && b2 === 'menu') {
+                return -1;
+            }
+
+            if(b1 === 'menu' && b2 === 'popup') {
+                return 1;
+            }
+
+            if(b1 && b2 && b1 === b2 && s1[2] && s2[2]) {
+                if(s1[2].charAt(0) === '_' && s2[2].charAt(0) !== '_') {
+                    return 1;
+                }
+
+                if(s2[2].charAt(0) === '_' && s1[2].charAt(0) !== '_') {
+                    return -1;
+                }
+
+                return 0;
+            }
+
+            return str1.localeCompare(str2);
+        }).map(function (url) {
             return '<script src="../../../' + url + '"></script>';
         }).join('\n');
 
