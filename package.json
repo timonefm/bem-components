@@ -56,6 +56,8 @@
     "start": "magic server",
     "deps": "bower i",
     "dist": "npm run deps && magic make dist/desktop dist/touch-pad dist/touch-phone",
+    "dist-gemini-test": "http-server -s -p 8000 & p=$!; gemini test gemini/dist.gemini.js --reporter html --reporter flat; e=$?; kill -9 ${p}; exit ${e}",
+    "dist-gemini-gather": "http-server -c \"no-cache, no-store\" -s -p 8000 & p=$!; gemini gather gemini/dist.gemini.js; kill -9 ${p}",
     "compiled": "find . -iname '*.styl' | xargs stylus",
     "build": "npm run build-${TEST_SCOPE:-all}",
     "build-all": "npm run deps && magic make desktop.examples desktop.tests desktop.docs touch.examples touch.tests touch.docs *.pages/*",
