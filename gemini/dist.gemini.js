@@ -5,6 +5,8 @@ gemini.suite('dist', function(root) {
     root
         .setUrl('desktop.pages/dist/dist.html')
         .setCaptureElements('.page')
-        .capture('plain');
+        .capture('plain', function(actions) {
+            actions.wait(5000);
+        });
 
 });
