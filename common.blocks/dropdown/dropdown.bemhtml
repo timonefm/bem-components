@@ -1,19 +1,27 @@
 block('dropdown')(
     def()(function() {
-        this.ctx.js = this.extend({ id : this.generateId() }, this.ctx.js);
-        applyCtx([apply('switcher'), apply('popup')]);
+        applyCtx([{ elem : 'switcher' }, { elem : 'popup' }]);
     }),
-    mode('switcher')(function() {
-        var ctx = this.ctx,
-            switcher = ctx.switcher;
+    def()(function() {
+        var ctx = this.ctx;
 
-        switcher.block && (switcher.mix = ctx);
-
-        return switcher;
+        ctx.js = this.extend(apply('js'), ctx.js);
+        applyNext({ _dropdown : ctx });
     }),
-    mode('popup')(function() {
-        var ctx = this.ctx,
-            popup = ctx.popup;
+    js()(function() {
+        return { id : this.generateId() };
+    }),
+    elem('switcher').def()(function() {
+        var dropdown = this._dropdown,
+            switcher = dropdown.switcher;
+
+        switcher.block && (switcher.mix = dropdown);
+
+        applyCtx(switcher);
+    }),
+    elem('popup').def()(function() {
+        var dropdown = this._dropdown,
+            popup = dropdown.popup;
 
         if(this.isSimple(popup) || popup.block !== 'popup') {
             popup = { block : 'popup', content : popup };
@@ -25,8 +33,8 @@ block('dropdown')(
 
         popupMods.target = 'anchor';
 
-        popup.mix = ctx;
+        popup.mix = dropdown;
 
-        return popup;
+        applyCtx(popup);
     })
 );
