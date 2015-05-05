@@ -36,7 +36,7 @@ block('menu')(
         this._firstItem = firstItem;
         this._checkedItems = checkedItems;
 
-        applyNext({
+        return applyNext({
             _menuMods : {
                 theme : mods.theme,
                 disabled : mods.disabled
