@@ -75,6 +75,7 @@ describe('dropdown', function() {
             var spy = sinon.spy();
 
             dropdown.getPopup().on({ modName : 'js', modVal : '' }, spy);
+            dropdown.setMod('opened');
             BEMDOM.destruct(dropdown.domElem);
 
             spy.should.have.been.calledOnce;
