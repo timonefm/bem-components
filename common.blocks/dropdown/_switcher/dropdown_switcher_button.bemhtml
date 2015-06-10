@@ -15,7 +15,7 @@ block('dropdown').mod('switcher', 'button').elem('switcher').def()(function() {
         resMods.theme || (resMods.theme = dropdownMods.theme);
         resMods.disabled = dropdownMods.disabled;
 
-        res.mix = dropdown;
+        res.mix = apply('mix');
     }
 
     applyCtx(res);

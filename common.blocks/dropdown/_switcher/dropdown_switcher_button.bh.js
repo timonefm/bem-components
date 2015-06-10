@@ -17,7 +17,7 @@ module.exports = function(bh) {
             resMods.theme || (resMods.theme = dropdownMods.theme);
             resMods.disabled = dropdownMods.disabled;
 
-            res.mix = dropdown;
+            res.mix = ctx.tParam('mix');
         }
 
         return res;

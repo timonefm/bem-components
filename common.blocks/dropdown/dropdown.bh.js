@@ -2,10 +2,18 @@ module.exports = function(bh) {
 
     bh.match({
         'dropdown' : function(ctx) {
+            var dropdown = ctx.json(),
+                dropdownMix = dropdown.mix;
+
             ctx
                 .js(ctx.extend({ id : ctx.generateId() }, ctx.js()))
-                .tParam('dropdown', ctx.json())
-                .tParam('theme', ctx.mod('theme'));
+                .tParam('dropdown', dropdown)
+                .tParam('theme', ctx.mod('theme'))
+                .tParam('mix', dropdownMix?
+                    Array.isArray(dropdownMix)?
+                        dropdownMix.concat([dropdown]) :
+                        [dropdownMix, dropdown] :
+                    dropdown);
 
             return [{ elem : 'switcher' }, { elem : 'popup' }];
         },
@@ -33,7 +41,7 @@ module.exports = function(bh) {
             var dropdown = ctx.tParam('dropdown'),
                 switcher = dropdown.switcher;
 
-            switcher.block && (switcher.mix = dropdown);
+            switcher.block && (switcher.mix = ctx.tParam('mix'));
 
             return switcher;
         }

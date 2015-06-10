@@ -15,9 +15,19 @@ block('dropdown')(
         var dropdown = this._dropdown,
             switcher = dropdown.switcher;
 
-        switcher.block && (switcher.mix = dropdown);
+        switcher.block && (switcher.mix = apply('mix'));
 
         applyCtx(switcher);
+    }),
+    elem('switcher').mix()(function() {
+        var dropdown = this._dropdown,
+            dropdownMix = dropdown.mix;
+
+        return dropdownMix?
+            Array.isArray(dropdownMix)?
+                dropdownMix.concat([dropdown]) :
+                [dropdownMix, dropdown] :
+            dropdown;
     }),
     elem('popup').def()(function() {
         var dropdown = this._dropdown,
