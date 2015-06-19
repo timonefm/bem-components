@@ -21,13 +21,16 @@ block('dropdown')(
     }),
     elem('switcher').mix()(function() {
         var dropdown = this._dropdown,
-            dropdownMix = dropdown.mix;
+            dropdownMix = dropdown.mix,
+            switcherMix = dropdown.switcher.mix || [];
 
-        return dropdownMix?
-            Array.isArray(dropdownMix)?
-                dropdownMix.concat([dropdown]) :
-                [dropdownMix, dropdown] :
-            dropdown;
+        Array.isArray(switcherMix) || (switcherMix = [switcherMix]);
+
+        return switcherMix.concat(dropdownMix?
+                    Array.isArray(dropdownMix)?
+                        dropdownMix.concat([dropdown]) :
+                        [dropdownMix, dropdown] :
+                    dropdown);
     }),
     elem('popup').def()(function() {
         var dropdown = this._dropdown,
@@ -43,7 +46,9 @@ block('dropdown')(
 
         popupMods.target = 'anchor';
 
-        popup.mix = dropdown;
+        var popupMix = popup.mix || [];
+        Array.isArray(popupMix) || (popupMix = [popupMix]);
+        popup.mix = popupMix.concat([dropdown]);
 
         applyCtx(popup);
     })

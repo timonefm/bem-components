@@ -3,17 +3,20 @@ module.exports = function(bh) {
     bh.match({
         'dropdown' : function(ctx) {
             var dropdown = ctx.json(),
-                dropdownMix = dropdown.mix;
+                dropdownMix = dropdown.mix,
+                switcherMix = dropdown.switcher.mix || [];
+
+            Array.isArray(switcherMix) || (switcherMix = [switcherMix]);
 
             ctx
                 .js(ctx.extend({ id : ctx.generateId() }, ctx.js()))
                 .tParam('dropdown', dropdown)
                 .tParam('theme', ctx.mod('theme'))
-                .tParam('mix', dropdownMix?
+                .tParam('mix', switcherMix.concat(dropdownMix?
                     Array.isArray(dropdownMix)?
                         dropdownMix.concat([dropdown]) :
                         [dropdownMix, dropdown] :
-                    dropdown);
+                    dropdown));
 
             return [{ elem : 'switcher' }, { elem : 'popup' }];
         },
@@ -32,7 +35,9 @@ module.exports = function(bh) {
 
             popupMods.target = 'anchor';
 
-            popup.mix = dropdown;
+            var popupMix = popup.mix || [];
+            Array.isArray(popupMix) || (popupMix = [popupMix]);
+            popup.mix = popupMix.concat([dropdown]);
 
             return popup;
         },
