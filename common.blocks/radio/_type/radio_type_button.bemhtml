@@ -1,4 +1,10 @@
 block('radio').mod('type', 'button')(
+    attrs()(function() {
+        return {
+            'role' : 'radio',
+            'aria-checked' : this.ctx.mods.checked
+        };
+    }),
     content()(function() {
         var ctx = this.ctx,
             mods = this.mods;
