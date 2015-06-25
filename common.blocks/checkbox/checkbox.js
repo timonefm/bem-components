@@ -13,7 +13,16 @@ modules.define('checkbox', ['i-bem__dom', 'control'], function(provide, BEMDOM, 
 provide(BEMDOM.decl({ block : this.name, baseBlock : Control }, /** @lends checkbox.prototype */{
     onSetMod : {
         'checked' : function(modName, modVal) {
+            this.domElem.attr('aria-checked', modVal || false);
             this.elem('control').prop(modName, modVal);
+        },
+        'disabled' : {
+            'true' : function() {
+                this.domElem.attr('aria-disabled', 'true');
+            },
+            '' : function() {
+                this.domElem.removeAttr('aria-disabled');
+            }
         }
     },
 

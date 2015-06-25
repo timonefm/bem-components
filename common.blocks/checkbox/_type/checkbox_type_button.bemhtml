@@ -1,4 +1,13 @@
 block('checkbox').mod('type', 'button')(
+    attrs()(function() {
+        var mods = this.ctx.mods;
+
+        return {
+            'role' : 'checkbox',
+            'aria-checked' : mods.checked,
+            'aria-disabled' : mods.disabled
+        };
+    }),
     content()(function() {
         var ctx = this.ctx,
             mods = this.mods;
