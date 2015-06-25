@@ -3,6 +3,10 @@ module.exports = function(bh) {
     bh.match('checkbox-group', function(ctx, json) {
         ctx
             .tag('span')
+            .attrs({
+                'role' : 'group',
+                'aria-label' : json.ariaLabel
+            })
             .js(true)
             .mix({ block : 'control-group' });
 
