@@ -46,6 +46,16 @@ describe('radio', function() {
             radioOption.domElem.trigger('change');
             radioOption.hasMod('checked').should.be.false;
         });
+
+        it('should properly update "aria-checked" attribute', function() {
+            radioOption
+                .setMod('checked')
+                .domElem.attr('aria-checked').should.be.equal('true');
+
+            radioOption
+                .delMod('checked')
+                .domElem.attr('aria-checked').should.be.equal('false');
+        });
     });
 });
 
